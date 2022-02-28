@@ -9,9 +9,14 @@ const { Option } = Select;
 
 const demoImage = 'http://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg';
 
+/**
+ * 
+ * @param simplified this parameter is to simplify the amount of data displayed to the user 
+ * @returns this funciton will return the news page, displaying news ariticles in card components and each card with a link and discription to that source.
+ */
 const News = ({ simplified }) => {
-    const [ newsCategory, setNewsCategory ] = useState('Cryptocurrency');
-    const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12})
+    const [ newsCategory, setNewsCategory ] = useState('Cryptocurrency');                               //This have default value of cryptocurrency set for search
+    const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12})     //This will simplify the amount of news card to be displayed
     const { data } = useGetCryptosQuery(100);
 
     if(!cryptoNews?.value) return 'Loading...';

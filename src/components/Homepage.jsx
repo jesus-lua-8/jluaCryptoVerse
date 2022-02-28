@@ -7,8 +7,12 @@ import { Cryptocurrencies, News } from '../components';
 
 const { Title } = Typography;
 
+/**
+ * 
+ * @returns This will return the homepage with a limit of crypto coins and news available. To see more the user can click on see more.
+ */
 const Homepage = () => {
-    const { data, isFetching } = useGetCryptosQuery(10);
+    const { data, isFetching } = useGetCryptosQuery(10);                //This hook has access to the API data that can be used and implemented.
     const globalStats = data?.data?.stats;
 
     if(isFetching) return 'Loading...';

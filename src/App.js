@@ -4,7 +4,11 @@ import { Layout, Typography, Space, Menu } from 'antd';
 import { Navbar, Exchanges, Homepage, Cryptocurrencies, News, CryptoDetails } from './components';
 import './App.css';
 
-
+/**
+ * With the navbar on the left side, for main the routes to display in the center of the screen.
+ * 
+ * @returns The application with navbar, main page, and footer. 
+ */
 export const App = () => {
     return (
         <div className="app">

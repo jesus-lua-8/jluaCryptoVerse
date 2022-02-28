@@ -11,17 +11,22 @@ import Chart from 'chart.js/auto'
 const { Title, Text } = Typography;
 const { Option } = Select;
 
+/**
+ * 
+ * @returns This will return the crypto details page with a features that include a timeline graph and clickable news regarding the corresponding coin.
+ */
 const CryptoDetails = () => {
-    const { coinId } = useParams();
-    const [ timePeriod, setTimePeriod ] = useState('7d');
+    const { coinId } = useParams();                                                 //Using hook useParams allows us to have access to the url parameters and use them.
+    const [ timePeriod, setTimePeriod ] = useState('7d');                           //Setting default time period to 7d when displaying the graph.
     const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
     const { data: coinHistory } = useGetCryptoHistoryQuery({coinId, timePeriod});
     const cryptoDetails = data?.data?.coin;
 
     if(isFetching) return 'Loading...';
 
-    const time = ['3h', '24h', '7d', '30d', '3m' ,'1y', '3y', '5y'];
+    const time = ['3h', '24h', '7d', '30d', '3m' ,'1y', '3y', '5y'];                //This will be the array containing the set time periods for user to choose from.
 
+    //This will be the stats for every coin, and this changes are daily.
     const stats = [
         { title: 'Price to USD', value: `$ ${cryptoDetails?.price && millify(cryptoDetails?.price)}`, icon: <DollarCircleOutlined /> },
         { title: 'Rank', value: cryptoDetails?.rank, icon: <NumberOutlined /> },
@@ -30,6 +35,7 @@ const CryptoDetails = () => {
         { title: 'All-time-high(daily avg.)', value: `$ ${cryptoDetails?.allTimeHigh?.price && millify(cryptoDetails?.allTimeHigh?.price)}`, icon: <TrophyOutlined /> },
       ];
     
+      //Array that contains the generic stats for choosen coin
       const genericStats = [
         { title: 'Number Of Markets', value: cryptoDetails?.numberOfMarkets, icon: <FundOutlined /> },
         { title: 'Number Of Exchanges', value: cryptoDetails?.numberOfExchanges, icon: <MoneyCollectOutlined /> },
@@ -52,6 +58,9 @@ const CryptoDetails = () => {
             <Select defaultValue='7d' className='select-timeperiod' placeholder='Select Time Period' onChange={(value) => setTimePeriod(value)}>
                 {time.map((date) => <Option key={date}>{date}</Option>)}
             </Select>
+            {/**------Comments---------
+                Line chart in the y-axis we will display the price change with repect with time. With time been in the x-axis as coinHistory.
+            */}
             <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails?.price)} coinName={cryptoDetails?.name} />
             <Col className='stats-container'>
                 <Col className='coin-value-statistics'>

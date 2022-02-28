@@ -5,6 +5,13 @@ import Chart from 'chart.js/auto'
 
 const { Title } = Typography;
 
+/**
+ * @coinHistory parameter that takes in the timeline of data per coin.
+ * @currentPrice parameter that cointains the price range for a particular time period
+ * @coinName parameter that contains the name of the crypto coin.
+ * 
+ * @return Function returns a line graph with all data input for display.
+ */
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinPrice = [];
   const coinTimestamp = [];
@@ -19,6 +26,7 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 
   console.log(coinTimestamp);
 
+  //This takes care of the y axis data, where the price range is displayed.
   const data = {
     labels: coinTimestamp,
     datasets: [
@@ -32,6 +40,7 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
     ],
   };
 
+  //Options is the about the users options to choose from 3h - 5y time range.
   const options = {
     scales: {
       yAxes:

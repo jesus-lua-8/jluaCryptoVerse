@@ -8,6 +8,10 @@ import 'antd/dist/antd.css';
 
 import store from './app/store';
 
+
+/**
+ * This makes all the routes of the app clickable and with a store provider to the app.
+ */
 ReactDOM.render(
     <Router>
         <Provider store={store}>

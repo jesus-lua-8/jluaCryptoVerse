@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined } from '@ant-design/icons';
 import icon from '../images/cryptocurrency.png';
 
-
+/**
+ * @return This functions represents the Navbar and has the components connected for user to choose how to navigate.
+ */
 const Navbar = () => {
     const [activeMenu, setActiveMenu] = useState(true);
     const [screenSize, setScreenSize] = useState(null);
 
-    useEffect(() => {
+    useEffect(() => {                                                   //The useEffect hook is applied whenever the screen size changes default size.
         const handleResize = () => setScreenSize(window.innerWidth);
 
         window.addEventListener('resize',handleResize);
@@ -37,7 +39,10 @@ const Navbar = () => {
                 <Button className='menu-control-container' onClick={() => setActiveMenu(true)}>
                     <MenuOutlined/>
                 </Button>
-            </div>            
+            </div>    
+            {/**
+            *Theme its set dark and with the components displayed as menu items. With every component there is designs from antd that allow icon modification for visualization ease.
+            */}        
             {activeMenu && (
                 <Menu theme='dark'>
                     <Menu.Item icon={<HomeOutlined/>}>
